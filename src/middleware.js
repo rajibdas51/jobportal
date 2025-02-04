@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 
 export function middleware(req) {
   const token = req.cookies.get('token');
+
   const { pathname } = req.nextUrl;
   // if user is not logged in and tries to access protected routes,redirect to login page
   if (!token && pathname !== '/login' && pathname !== '/register') {
@@ -18,6 +19,7 @@ export function middleware(req) {
 
 export const config = {
   matcher: [
+    '/',
     '/dashboard/:path*',
     '/jobs/:path*',
     '/profile/:path*',
