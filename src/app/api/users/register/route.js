@@ -1,16 +1,37 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import { Provider } from 'react-redux';
-import store from '@/redux/store';
+import { NextRequest, NextResponse } from 'next/server';
+import { connectDb } from '@/utils/connectdb';
+import userModel from '@/models/userModel';
+import bcrypt from 'bcryptjs';
+import { revalidatePath } from 'next/cache';
 
-const ReduxtProvider = ({ children }) => {
-  const [mounted, setMounted] = useState(false);
+connectDb();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+export async function POST(request) {
+  try {
+    const reqBody = await request.json();
+    // check if user already exists
+    const userExists = await User.findOne({ email: reqBody.email });
+    if (userExists) {
+      throw new Error('User already exists!');
+    }
 
-  if (mounted) {
-    return <Provider store={store}>{children}</Provider>;
+    // hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(reqBody.password, salt);
+    reqBody.password = hashedPassword;
+
+    // create new user
+    await User.create(reqBody);
+    revalidatePath('/');
+
+    return NextResponse.json(
+      {
+        message: 'User created Successfully!',
+        success: true,
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    return NextResponse.json({ message: error.message }, { status: 500 });
   }
-};
+}
