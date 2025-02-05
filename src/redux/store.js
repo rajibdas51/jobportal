@@ -7,3 +7,4 @@ const store = configureStore({
     loaders: loaderReducer,
   },
 });
+export default store;

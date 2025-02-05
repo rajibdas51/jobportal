@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { connectDb } from '@/utils/connectdb';
-import userModel from '@/models/userModel';
+import User from '@/models/userModel';
 import bcrypt from 'bcryptjs';
 import { revalidatePath } from 'next/cache';
 
