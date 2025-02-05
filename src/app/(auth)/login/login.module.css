@@ -1,0 +1,85 @@
+.authContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.authBox {
+  display: flex;
+  width: 800px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.formSection {
+  flex: 1;
+  padding: 2rem;
+  background: white;
+  text-align: center;
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+.sidePanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #049669, #01505e);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+.formLeft {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.formRight {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.panelLeft {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.panelRight {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.registerActive .formLeft {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.registerActive .formRight {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.registerActive .panelLeft {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.registerActive .panelRight {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .authBox {
+    flex-direction: column;
+  }
+  .sidePanel {
+    display: none;
+  }
+}
