@@ -4,7 +4,7 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#049669', // Change primary color
+      main: '#182F59', // Change primary color
     },
     secondary: {
       main: '#ff8e53', // Change secondary color
@@ -15,12 +15,6 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: 'Arial, sans-serif', // Customize font
-    h1: {
-      fontWeight: 700,
-    },
-    body1: {
-      fontSize: '2.5rem',
-    },
   },
   components: {
     MuiButton: {

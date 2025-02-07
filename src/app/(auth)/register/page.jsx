@@ -2,88 +2,76 @@
 import { useState } from 'react';
 import { TextField, Button, Typography, Container, Box } from '@mui/material';
 import styles from './register.module.css';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-const AuthPage = () => {
+const RegisterPage = () => {
   const [isRegister, setIsRegister] = useState(false);
-
-  const toggleForm = () => {
-    setIsRegister(!isRegister);
-  };
+  const router = useRouter();
+  const toggleForm = () => {};
 
   return (
-    <Container maxWidth='md' className={styles.authContainer}>
+    <Container maxWidth='lg' className={styles.authContainer}>
       <Box
         className={`${styles.authBox} ${
           isRegister ? styles.registerActive : ''
         }`}
       >
-        <Box
-          className={`${styles.formSection} ${
-            isRegister ? styles.formRight : styles.formLeft
-          }`}
-        >
+        <Box className={`${styles.formSection} ${styles.formLeft}`}>
           <Typography variant='h4' className={styles.title}>
-            {isRegister ? 'Register' : 'Login'}
+            Login
           </Typography>
           <TextField
-            label='Email'
             fullWidth
+            variant='outlined'
+            label='Email'
+            name='email'
+            id='outlined-basic'
             margin='normal'
-            className={styles.input}
+            size='small'
           />
           <TextField
+            name='password'
             label='Password'
             type='password'
             fullWidth
             margin='normal'
-            className={styles.input}
+            size='small'
           />
-          {isRegister && (
-            <TextField
-              label='Confirm Password'
-              type='password'
-              fullWidth
-              margin='normal'
-              className={styles.input}
-            />
-          )}
+
           <Button
             variant='contained'
             color='primary'
             fullWidth
             className={styles.button}
           >
-            {isRegister ? 'Sign Up' : 'Sign In'}
+            Sign Up
           </Button>
           <Typography
             variant='body2'
             className={styles.toggleText}
             onClick={toggleForm}
           >
-            {isRegister
-              ? 'Already have an account? Login'
-              : "Don't have an account? Register"}
+            <Link href='/login' underline='hover'>
+              Already have an account? Sign In
+            </Link>
           </Typography>
         </Box>
-        <Box
-          className={`${styles.sidePanel} ${
-            isRegister ? styles.panelLeft : styles.panelRight
-          }`}
-        >
-          <Typography variant='h4' className={styles.sideTitle}>
-            {isRegister ? 'Hello, Friend!' : 'Welcome Back!'}
-          </Typography>
-          <Typography variant='body1' className={styles.sideText}>
-            {isRegister
-              ? 'Enter your personal details and start your journey with us'
-              : 'Enter your details to login and start your journey with us'}
+        <Box className={`${styles.sidePanel} ${styles.panelRight}`}>
+          <Typography variant='h4'>Welcome Back!</Typography>
+          <Typography variant='body1' sx={{ fontSize: '2rem', mb: '20px' }}>
+            Enter your details to login and start your journey with us
           </Typography>
           <Button
-            variant='outlined'
+            sx={{
+              border: '1px solid #ffff',
+              color: '#182F59',
+              padding: '8px 18px',
+            }}
             className={styles.sideButton}
-            onClick={toggleForm}
+            onClick={() => router.push('/register')}
           >
-            {isRegister ? 'Login' : 'Register'}
+            Sign Up
           </Button>
         </Box>
       </Box>
@@ -91,4 +79,4 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+export default RegisterPage;
