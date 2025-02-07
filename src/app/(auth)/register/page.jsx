@@ -19,7 +19,7 @@ const RegisterPage = () => {
       >
         <Box className={`${styles.formSection} ${styles.formLeft}`}>
           <Typography variant='h4' className={styles.title}>
-            Login
+            Sign Up
           </Typography>
           <TextField
             fullWidth
@@ -43,7 +43,7 @@ const RegisterPage = () => {
             variant='contained'
             color='primary'
             fullWidth
-            className={styles.button}
+            sx={{ padding: '8px 18px', my: '20px' }}
           >
             Sign Up
           </Button>
@@ -58,9 +58,9 @@ const RegisterPage = () => {
           </Typography>
         </Box>
         <Box className={`${styles.sidePanel} ${styles.panelRight}`}>
-          <Typography variant='h4'>Welcome Back!</Typography>
+          <Typography variant='h4'>Hello There!</Typography>
           <Typography variant='body1' sx={{ fontSize: '2rem', mb: '20px' }}>
-            Enter your details to login and start your journey with us
+            Enter your personal details and start your journey with us
           </Typography>
           <Button
             sx={{
@@ -69,9 +69,9 @@ const RegisterPage = () => {
               padding: '8px 18px',
             }}
             className={styles.sideButton}
-            onClick={() => router.push('/register')}
+            onClick={() => router.push('/login')}
           >
-            Sign Up
+            Sign In
           </Button>
         </Box>
       </Box>
