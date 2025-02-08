@@ -26,7 +26,7 @@ export async function POST(request) {
 
     return NextResponse.json(
       {
-        message: 'User created Successfully!',
+        message: 'Sign Up Successfull!',
         success: true,
       },
       { status: 201 }

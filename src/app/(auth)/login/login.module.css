@@ -1,19 +1,26 @@
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('/login-bg.jpg') center/cover no-repeat;
+}
 .authContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   padding: 20px;
+  z-index: 1;
 }
 
 .authBox {
   display: flex;
   width: 90%;
   max-width: 900px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   overflow: hidden;
-  background: white;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .formSection {
@@ -34,6 +41,8 @@
   background: linear-gradient(90deg, #182f59, #01505e);
   color: white;
   padding: 3rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
   text-align: center;
 }
 
