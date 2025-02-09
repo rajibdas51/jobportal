@@ -4,14 +4,37 @@ import { TextField, Button, Typography, Container, Box } from '@mui/material';
 import styles from './login.module.css';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { setIsLoading } from '@/redux/loaderSlice';
+import { setCurrentUser } from '@/redux/userSlice';
+import axios from 'axios';
 const LoginPage = () => {
-  const [isRegister, setIsRegister] = useState(false);
   const router = useRouter();
-  const toggleForm = () => {
-    //  setIsRegister(!isRegister);
-  };
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState({ email: '', password: '' });
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      const response = await axios.post('/api/users/login', formData);
+      toast.success(response.data.message);
+      dispatch(setCurrentUser(response.data.user));
+
+      router.push('/dashboard');
+      console.log(response.data.user);
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Something went wrong');
+      console.error(err);
+    } finally {
+      dispatch(setIsLoading(false));
+    }
+  };
   return (
     <Box
       sx={{
@@ -27,38 +50,44 @@ const LoginPage = () => {
       }}
     >
       <Container maxWidth='lg' className={styles.authContainer}>
-        <Box
-          className={`${styles.authBox} ${
-            isRegister ? styles.registerActive : ''
-          }`}
-        >
+        <Box className={`${styles.authBox} `}>
           <Box className={`${styles.formSection} ${styles.formLeft}`}>
             <Typography variant='h4' className={styles.title}>
               Sign In
             </Typography>
-            <TextField label='Email' name='email' margin='normal' size='md' />
-            <TextField
-              name='password'
-              label='Password'
-              type='password'
-              fullWidth
-              margin='normal'
-              size='md'
-            />
+            <form onSubmit={handleSubmit}>
+              <TextField
+                label='Email'
+                name='email'
+                type='email'
+                margin='normal'
+                size='small'
+                fullWidth
+                value={formData.email}
+                onChange={handleChange}
+              />
+              <TextField
+                name='password'
+                label='Password'
+                type='password'
+                fullWidth
+                margin='normal'
+                size='small'
+                value={formData.password}
+                onChange={handleChange}
+              />
 
-            <Button
-              variant='contained'
-              color='primary'
-              fullWidth
-              sx={{ padding: '8px 18px', m: '20px' }}
-            >
-              Sign In
-            </Button>
-            <Typography
-              variant='body2'
-              className={styles.toggleText}
-              onClick={toggleForm}
-            >
+              <Button
+                variant='contained'
+                color='primary'
+                fullWidth
+                sx={{ padding: '8px 18px', m: '20px' }}
+                type='submit'
+              >
+                Sign In
+              </Button>
+            </form>
+            <Typography variant='body2' className={styles.toggleText}>
               <Link href='/register' underline='hover'>
                 Don't have an account? Sign Up
               </Link>

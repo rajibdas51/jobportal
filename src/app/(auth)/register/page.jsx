@@ -10,7 +10,6 @@ import { toast } from 'react-toastify';
 import axios from 'axios'; // Added missing axios import
 
 const RegisterPage = () => {
-  const [isRegister, setIsRegister] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
@@ -26,9 +25,9 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(setIsLoading(true));
 
     try {
+      dispatch(setIsLoading(true));
       const response = await axios.post('/api/users/register', formData);
       toast.success(response.data.message);
       router.push('/login');
@@ -59,11 +58,7 @@ const RegisterPage = () => {
         className={styles.authContainer}
         sx={{ zIndex: 9999 }}
       >
-        <Box
-          className={`${styles.authBox} ${
-            isRegister ? styles.registerActive : ''
-          }`}
-        >
+        <Box className={`${styles.authBox}`}>
           <Box className={`${styles.formSection} ${styles.formLeft}`}>
             <Typography variant='h4' className={styles.title}>
               Sign Up
