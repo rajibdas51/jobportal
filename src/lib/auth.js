@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { setCurrentUser } from '@/redux/usersSlice';
+import { setCurrentUser } from '@/redux/userSlice';
 import { useDispatch } from 'react-redux';
-import { setLoading } from '@/redux/loadersSlice';
+import { setLoading } from '@/redux/loaderSlice';
 import { useRouter } from 'next/navigation';
 export const fetchCurrentUser = async (dispatch) => {
   try {
