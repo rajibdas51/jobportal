@@ -38,6 +38,7 @@ export async function POST(req) {
         message: 'Sign in Successfull!',
         success: true,
         token: token,
+        data: user,
       },
       { status: 200 }
     );

@@ -1,11 +1,12 @@
+'use client';
 import Image from 'next/image';
 import styles from './page.module.css';
+import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
 
 export default function Home({ children }) {
-  const router = useRouter();
-  const path = router.pathname;
+  const currentUser = useSelector((state) => state.user);
+  console.log(currentUser.name);
 
-  if (path === '/') {
-  }
-  return <>{children}</>;
+  return <>Welcome {currentUser?.name}!</>;
 }
