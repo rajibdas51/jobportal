@@ -1,17 +1,16 @@
+// app/page.jsx
 'use client';
-import Image from 'next/image';
-import styles from './page.module.css';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentUser } from '@/lib/auth';
 import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
+import { fetchCurrentUser } from '@/lib/auth';
+import DashboardLayout from '@/components/layouts/DashboardLayout';
 
-export default function Home({ children }) {
+export default function HomePage({ children }) {
+  const router = useRouter();
   const { currentUser } = useSelector((state) => state.user);
-  console.log(currentUser?.name);
-  const pathname = usePathname();
   const dispatch = useDispatch();
+
   useEffect(() => {
     const initializeUser = async () => {
       if (!currentUser) {
@@ -21,8 +20,8 @@ export default function Home({ children }) {
         }
       }
     };
-
     initializeUser();
-  }, [pathname]);
-  return <>Welcome {currentUser?.name}!</>;
+  }, [currentUser, dispatch, router]);
+
+  return <div>{children}</div>;
 }
