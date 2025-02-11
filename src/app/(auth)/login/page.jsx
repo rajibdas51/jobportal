@@ -26,7 +26,7 @@ const LoginPage = () => {
       toast.success(response.data.message);
       dispatch(setCurrentUser(response.data.user));
 
-      router.push('/dashboard');
+      router.push('/');
       console.log(response.data.data.user);
     } catch (err) {
       toast.error(err.response?.data?.message || 'Something went wrong');

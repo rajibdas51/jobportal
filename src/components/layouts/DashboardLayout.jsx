@@ -22,6 +22,8 @@ import {
   PlayCircle,
   Close,
   AccountCircle,
+  ListAltOutlined,
+  ListAltRounded,
 } from '@mui/icons-material';
 import Image from 'next/image';
 import logo from '../../../public/logo.png';
@@ -36,7 +38,7 @@ export default function DashboardLayout({ children }) {
   // menu items
   const menuItems = [
     { icon: <Home />, label: 'Home', path: '/' },
-    { icon: <WorkOutline />, lebel: 'Posted jobs', path: '/jobs' },
+    { icon: <ListAltRounded />, lebel: 'Posted jobs', path: '/jobs' },
     { icon: <AddBox />, label: 'create job', path: '/create-job' },
     { icon: <Support />, label: 'Support', path: '/support' },
   ];
