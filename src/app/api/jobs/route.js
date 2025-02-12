@@ -28,3 +28,16 @@ export async function POST(req) {
     return NextResponse.json({ message: err.message }, { status: 500 });
   }
 }
+
+export async function GET() {
+  try {
+    await dbConnect();
+    const jobs = await Job.find({}).sort({ createdAt: -1 });
+    return NextResponse.json({ data: jobs });
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Failed to fetch jobs' },
+      { status: 500 }
+    );
+  }
+}
